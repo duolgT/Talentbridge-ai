@@ -1,0 +1,106 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/manrope";
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors */
+  --color-brand-50: #edf9f4;
+  --color-brand-100: #d6f0e6;
+  --color-brand-200: #aee1ce;
+  --color-brand-300: #79cbb0;
+  --color-brand-400: #40ad8d;
+  --color-brand-500: #16826b;
+  --color-brand-600: #106b58;
+  --color-brand-700: #105648;
+  --color-brand-800: #12463b;
+  --color-brand-900: #123c35;
+  --color-brand-950: #08251f;
+
+  /* Semantic colors */
+  --color-primary: #16826b;
+  --color-primary-dark: #123c35;
+  --color-accent: #d5f76a;
+  --color-canvas: #f6f8f5;
+  --color-surface: #ffffff;
+  --color-ink: #14251f;
+  --color-muted: #64748b;
+  --color-border: #e2e8e4;
+
+  --color-success: #15803d;
+  --color-warning: #b45309;
+  --color-danger: #b91c1c;
+  --color-info: #2563eb;
+
+  /* Typography */
+  --font-sans: "Inter Variable", sans-serif;
+  --font-display: "Manrope Variable", sans-serif;
+
+  /* Border radius */
+  --radius-card: 1rem;
+  --radius-button: 0.625rem;
+
+  /* Shadows */
+  --shadow-card: 0 2px 8px rgb(18 60 53 / 0.05);
+  --shadow-elevated: 0 12px 32px rgb(18 60 53 / 0.10);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    min-width: 320px;
+    margin: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-primary-dark);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .surface-card {
+    @apply rounded-card border border-border
+           bg-surface p-6 shadow-card;
+  }
+}
