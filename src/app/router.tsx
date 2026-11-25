@@ -1,21 +1,27 @@
 import { createBrowserRouter } from 'react-router-dom'
 
+// Authentication
+import ProtectedRoute from '../features/auth/ProtectedRoute'
+import LoginPage from '../pages/public/LoginPage'
+import RegisterPage from '../pages/public/RegisterPage'
+
+// Layouts
 import PublicLayout from '../layouts/PublicLayout'
 import DashboardLayout from '../layouts/DashboardLayout'
 
+// Public pages
 import HomePage from '../pages/public/HomePage'
 import AboutPage from '../pages/public/AboutPage'
 import NotFoundPage from '../pages/public/NotFoundPage'
 
+// Candidate pages
 import DashboardPage from '../pages/candidate/DashboardPage'
+import ProfilePage from '../pages/candidate/ProfilePage'
+
 import PlaceholderPage from '../pages/PlaceholderPage'
 
+// Pages awaiting implementation
 const candidatePages = [
-  {
-    path: 'profile',
-    title: 'Professional profile',
-    description: 'Manage your education and professional experience.',
-  },
   {
     path: 'skills',
     title: 'AI skills mapping',
@@ -54,6 +60,21 @@ const candidatePages = [
 ]
 
 export const router = createBrowserRouter([
+
+  // Authentication routes
+
+  {
+    path: '/register',
+    element: <RegisterPage />,
+  },
+
+  {
+    path: '/login',
+    element: <LoginPage />,
+  },
+
+  // Public routes
+
   {
     path: '/',
     element: <PublicLayout />,
@@ -66,48 +87,51 @@ export const router = createBrowserRouter([
         path: 'about',
         element: <AboutPage />,
       },
-      {
-        path: 'login',
-        element: (
-          <PlaceholderPage
-            title="Sign in"
-            description="Authentication will be connected in Phase 3."
-            backTo="/"
-          />
-        ),
-      },
-      {
-        path: 'register',
-        element: (
-          <PlaceholderPage
-            title="Create your account"
-            description="Candidate registration will be connected in Phase 3."
-            backTo="/"
-          />
-        ),
-      },
     ],
   },
+
+  // Protected candidate routes
+
   {
-    element: <DashboardLayout />,
+    element: <ProtectedRoute />,
     children: [
       {
-        path: 'dashboard',
-        element: <DashboardPage />,
+        element: <DashboardLayout />,
+        children: [
+
+          // Functional dashboard
+          {
+            path: 'dashboard',
+            element: <DashboardPage />,
+          },
+
+          // Functional professional profile
+          {
+            path: 'profile',
+            element: <ProfilePage />,
+          },
+
+          // Remaining placeholder pages
+          ...candidatePages.map((page) => ({
+            path: page.path,
+            element: (
+              <PlaceholderPage
+                title={page.title}
+                description={page.description}
+              />
+            ),
+          })),
+
+        ],
       },
-      ...candidatePages.map((page) => ({
-        path: page.path,
-        element: (
-          <PlaceholderPage
-            title={page.title}
-            description={page.description}
-          />
-        ),
-      })),
     ],
   },
+
+  // 404 fallback
+
   {
     path: '*',
     element: <NotFoundPage />,
   },
+
 ])
