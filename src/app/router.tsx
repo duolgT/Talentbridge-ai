@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
+import EvidencePage from '../pages/candidate/EvidencePage'
 
 import SkillsPage from '../pages/candidate/SkillsPage'
 
@@ -30,12 +31,7 @@ import PlaceholderPage from '../pages/PlaceholderPage'
 // Pages awaiting implementation
 const candidatePages = [
   
-  {
-    path: 'evidence',
-    title: 'Evidence portfolio',
-    description:
-      'Manage work samples, certificates and references.',
-  },
+  
   {
     path: 'assessments',
     title: 'Skills assessments',
@@ -143,6 +139,12 @@ export const router = createBrowserRouter([
   path: 'skills',
   element: <SkillsPage />,
 },
+
+ {
+    path: 'evidence',
+    element: <EvidencePage />,
+  },
+
 
               ...candidatePages.map((page) => ({
                 path: page.path,
