@@ -1,9 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-// Authentication
+// Authentication and authorization
 import ProtectedRoute from '../features/auth/ProtectedRoute'
-import LoginPage from '../pages/public/LoginPage'
-import RegisterPage from '../pages/public/RegisterPage'
+import RoleGuard from '../features/auth/RoleGuard'
 
 // Layouts
 import PublicLayout from '../layouts/PublicLayout'
@@ -12,12 +11,18 @@ import DashboardLayout from '../layouts/DashboardLayout'
 // Public pages
 import HomePage from '../pages/public/HomePage'
 import AboutPage from '../pages/public/AboutPage'
+import LoginPage from '../pages/public/LoginPage'
+import RegisterPage from '../pages/public/RegisterPage'
 import NotFoundPage from '../pages/public/NotFoundPage'
+import UnauthorizedPage from '../pages/public/UnauthorizedPage'
 
 // Candidate pages
 import DashboardPage from '../pages/candidate/DashboardPage'
 import ProfilePage from '../pages/candidate/ProfilePage'
 
+// Shared pages
+import SharedProfilePage from '../pages/SharedProfilePage'
+import RoleDashboard from '../pages/RoleDashboard'
 import PlaceholderPage from '../pages/PlaceholderPage'
 
 // Pages awaiting implementation
@@ -25,37 +30,44 @@ const candidatePages = [
   {
     path: 'skills',
     title: 'AI skills mapping',
-    description: 'Discover competencies from your professional experience.',
+    description:
+      'Discover competencies from your professional experience.',
   },
   {
     path: 'evidence',
     title: 'Evidence portfolio',
-    description: 'Manage work samples, certificates and references.',
+    description:
+      'Manage work samples, certificates and references.',
   },
   {
     path: 'assessments',
     title: 'Skills assessments',
-    description: 'Demonstrate your professional abilities.',
+    description:
+      'Demonstrate your professional abilities.',
   },
   {
     path: 'passport',
     title: 'Digital skills passport',
-    description: 'Build and share your professional evidence.',
+    description:
+      'Build and share your professional evidence.',
   },
   {
     path: 'readiness',
     title: 'Employment readiness',
-    description: 'Prepare for lawful employment and documentation requirements.',
+    description:
+      'Prepare for lawful employment and documentation requirements.',
   },
   {
     path: 'opportunities',
     title: 'Professional opportunities',
-    description: 'Discover relevant skills-based opportunities.',
+    description:
+      'Discover relevant skills-based opportunities.',
   },
   {
     path: 'settings',
     title: 'Account settings',
-    description: 'Manage your account preferences.',
+    description:
+      'Manage your account preferences.',
   },
 ]
 
@@ -71,6 +83,11 @@ export const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage />,
+  },
+
+  {
+    path: '/unauthorized',
+    element: <UnauthorizedPage />,
   },
 
   // Public routes
@@ -90,40 +107,107 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // Protected candidate routes
+  // Authenticated routes
 
   {
     element: <ProtectedRoute />,
+
     children: [
+
+      // Shared profile for all authenticated roles
+
       {
-        element: <DashboardLayout />,
+        path: 'account/profile',
+        element: <SharedProfilePage />,
+      },
+
+      // Candidate routes
+
+      {
+        element: (
+          <RoleGuard allowedRoles={['candidate']} />
+        ),
+
         children: [
-
-          // Functional dashboard
           {
-            path: 'dashboard',
-            element: <DashboardPage />,
+            element: <DashboardLayout />,
+
+            children: [
+              {
+                path: 'dashboard',
+                element: <DashboardPage />,
+              },
+
+              {
+                path: 'profile',
+                element: <ProfilePage />,
+              },
+
+              ...candidatePages.map((page) => ({
+                path: page.path,
+                element: (
+                  <PlaceholderPage
+                    title={page.title}
+                    description={page.description}
+                  />
+                ),
+              })),
+            ],
           },
-
-          // Functional professional profile
-          {
-            path: 'profile',
-            element: <ProfilePage />,
-          },
-
-          // Remaining placeholder pages
-          ...candidatePages.map((page) => ({
-            path: page.path,
-            element: (
-              <PlaceholderPage
-                title={page.title}
-                description={page.description}
-              />
-            ),
-          })),
-
         ],
       },
+
+      // Reviewer routes
+
+      {
+        element: (
+          <RoleGuard allowedRoles={['reviewer']} />
+        ),
+
+        children: [
+          {
+            path: 'reviewer/dashboard',
+            element: (
+              <RoleDashboard role="reviewer" />
+            ),
+          },
+        ],
+      },
+
+      // Employer routes
+
+      {
+        element: (
+          <RoleGuard allowedRoles={['employer']} />
+        ),
+
+        children: [
+          {
+            path: 'employer/dashboard',
+            element: (
+              <RoleDashboard role="employer" />
+            ),
+          },
+        ],
+      },
+
+      // Administrator routes
+
+      {
+        element: (
+          <RoleGuard allowedRoles={['admin']} />
+        ),
+
+        children: [
+          {
+            path: 'admin/dashboard',
+            element: (
+              <RoleDashboard role="admin" />
+            ),
+          },
+        ],
+      },
+
     ],
   },
 

@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Link, Navigate } from 'react-router-dom'
+import { ROLE_HOME } from '../../constants/roles'
 
 import {
   Eye,
@@ -55,8 +56,13 @@ export default function LoginPage() {
   }
 
   if (!loading && session && profile) {
-    return <Navigate to="/dashboard" replace />
-  }
+  return (
+    <Navigate
+      to={ROLE_HOME[profile.role]}
+      replace
+    />
+  )
+}
 
   return (
     <main className="grid min-h-screen bg-white lg:grid-cols-2">

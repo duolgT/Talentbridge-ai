@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import ProfessionalHistory from '../../features/profile/ProfessionalHistory'
 
 
 import {
@@ -41,13 +42,25 @@ export default function ProfilePage() {
   }
 
   return (
-    <ProfileForm
-      key={profile.id}
-      profile={profile}
-    />
+    <div className="mx-auto max-w-5xl space-y-6">
+
+      <ProfileForm
+        key={profile.id}
+        profile={profile}
+      />
+
+      {profile.role === 'candidate' && (
+
+        <ProfessionalHistory
+          key={profile.id}
+          candidateId={profile.id}
+        />
+
+      )}
+
+    </div>
   )
 }
-
 function ProfileForm({
   profile,
 }: {
