@@ -1,6 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom'
 import EvidencePage from '../pages/candidate/EvidencePage'
 
+import PassportPage from '../pages/candidate/PassportPage'
+
+import VerifyPassportPage from '../pages/public/VerifyPassportPage'
 
 import ReviewerDashboard from '../pages/reviewer/ReviewerDashboard'
 
@@ -41,12 +44,7 @@ const candidatePages = [
     description:
       'Demonstrate your professional abilities.',
   },
-  {
-    path: 'passport',
-    title: 'Digital skills passport',
-    description:
-      'Build and share your professional evidence.',
-  },
+  
   {
     path: 'readiness',
     title: 'Employment readiness',
@@ -148,6 +146,11 @@ export const router = createBrowserRouter([
     element: <EvidencePage />,
   },
 
+  {
+  path: 'passport',
+  element: <PassportPage />,
+},
+
 
               ...candidatePages.map((page) => ({
                 path: page.path,
@@ -164,6 +167,11 @@ export const router = createBrowserRouter([
       },
 
       // Reviewer routes
+
+      {
+  path: '/verify/:token',
+  element: <VerifyPassportPage />,
+},
 
       {
   element: (

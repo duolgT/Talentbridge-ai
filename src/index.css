@@ -104,3 +104,74 @@
            bg-surface p-6 shadow-card;
   }
 }
+
+
+/* Digital Skills Passport PDF export */
+
+@page {
+  size: A4 portrait;
+  margin: 12mm;
+}
+
+@media print {
+
+  html,
+  body {
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body:has(#passport-print-area)
+    *:not(:has(#passport-print-area))
+    :not(#passport-print-area) {
+    /* Passport visibility is controlled below. */
+  }
+
+  body:has(#passport-print-area) * {
+    visibility: hidden !important;
+  }
+
+  body:has(#passport-print-area)
+    #passport-print-area,
+  body:has(#passport-print-area)
+    #passport-print-area * {
+    visibility: visible !important;
+  }
+
+  body:has(#passport-print-area)
+    *:has(#passport-print-area) {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    transform: none !important;
+  }
+
+  #passport-print-area {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  #passport-print-area header {
+    break-inside: avoid;
+  }
+
+  #passport-print-area section > div {
+    break-inside: auto;
+  }
+
+  .passport-no-print {
+    display: none !important;
+  }
+}
