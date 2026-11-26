@@ -1,5 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 
+import SkillsPage from '../pages/candidate/SkillsPage'
+
 // Authentication and authorization
 import ProtectedRoute from '../features/auth/ProtectedRoute'
 import RoleGuard from '../features/auth/RoleGuard'
@@ -27,12 +29,7 @@ import PlaceholderPage from '../pages/PlaceholderPage'
 
 // Pages awaiting implementation
 const candidatePages = [
-  {
-    path: 'skills',
-    title: 'AI skills mapping',
-    description:
-      'Discover competencies from your professional experience.',
-  },
+  
   {
     path: 'evidence',
     title: 'Evidence portfolio',
@@ -142,6 +139,10 @@ export const router = createBrowserRouter([
                 path: 'profile',
                 element: <ProfilePage />,
               },
+              {
+  path: 'skills',
+  element: <SkillsPage />,
+},
 
               ...candidatePages.map((page) => ({
                 path: page.path,
