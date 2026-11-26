@@ -1,6 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom'
 import EvidencePage from '../pages/candidate/EvidencePage'
 
+
+import ReviewerDashboard from '../pages/reviewer/ReviewerDashboard'
+
 import SkillsPage from '../pages/candidate/SkillsPage'
 
 // Authentication and authorization
@@ -163,19 +166,17 @@ export const router = createBrowserRouter([
       // Reviewer routes
 
       {
-        element: (
-          <RoleGuard allowedRoles={['reviewer']} />
-        ),
+  element: (
+    <RoleGuard allowedRoles={['reviewer']} />
+  ),
 
-        children: [
-          {
-            path: 'reviewer/dashboard',
-            element: (
-              <RoleDashboard role="reviewer" />
-            ),
-          },
-        ],
-      },
+  children: [
+    {
+      path: 'reviewer/dashboard',
+      element: <ReviewerDashboard />,
+    },
+  ],
+},
 
       // Employer routes
 
