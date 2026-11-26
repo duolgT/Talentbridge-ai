@@ -1,78 +1,74 @@
 import { createBrowserRouter } from 'react-router-dom'
-import EvidencePage from '../pages/candidate/EvidencePage'
-
-import PassportPage from '../pages/candidate/PassportPage'
-
-import VerifyPassportPage from '../pages/public/VerifyPassportPage'
-
-import ReviewerDashboard from '../pages/reviewer/ReviewerDashboard'
-
-import SkillsPage from '../pages/candidate/SkillsPage'
 
 // Authentication and authorization
+
 import ProtectedRoute from '../features/auth/ProtectedRoute'
 import RoleGuard from '../features/auth/RoleGuard'
 
 // Layouts
+
 import PublicLayout from '../layouts/PublicLayout'
 import DashboardLayout from '../layouts/DashboardLayout'
 
 // Public pages
+
 import HomePage from '../pages/public/HomePage'
 import AboutPage from '../pages/public/AboutPage'
 import LoginPage from '../pages/public/LoginPage'
 import RegisterPage from '../pages/public/RegisterPage'
 import NotFoundPage from '../pages/public/NotFoundPage'
 import UnauthorizedPage from '../pages/public/UnauthorizedPage'
+import VerifyPassportPage from '../pages/public/VerifyPassportPage'
 
 // Candidate pages
+
 import DashboardPage from '../pages/candidate/DashboardPage'
 import ProfilePage from '../pages/candidate/ProfilePage'
+import SkillsPage from '../pages/candidate/SkillsPage'
+import EvidencePage from '../pages/candidate/EvidencePage'
+import PassportPage from '../pages/candidate/PassportPage'
+import ReadinessPage from '../pages/candidate/ReadinessPage'
+
+// Reviewer pages
+
+import ReviewerDashboard from '../pages/reviewer/ReviewerDashboard'
 
 // Shared pages
+
 import SharedProfilePage from '../pages/SharedProfilePage'
 import RoleDashboard from '../pages/RoleDashboard'
 import PlaceholderPage from '../pages/PlaceholderPage'
 
-// Pages awaiting implementation
+// Remaining candidate placeholders
+
 const candidatePages = [
-  
-  
   {
     path: 'assessments',
     title: 'Skills assessments',
     description:
-      'Demonstrate your professional abilities.',
-  },
-  
-  {
-    path: 'readiness',
-    title: 'Employment readiness',
-    description:
-      'Prepare for lawful employment and documentation requirements.',
+      'Demonstrate your professional competencies through practical assessments.',
   },
   {
     path: 'opportunities',
-    title: 'Professional opportunities',
+    title: 'Opportunity matching',
     description:
-      'Discover relevant skills-based opportunities.',
+      'Discover employment and training opportunities aligned with your professional skills.',
   },
   {
     path: 'settings',
     title: 'Account settings',
     description:
-      'Manage your account preferences.',
+      'Manage your account preferences, privacy and security.',
   },
 ]
 
+// Application router
+
 export const router = createBrowserRouter([
 
-  // Authentication routes
-
-  {
-    path: '/register',
-    element: <RegisterPage />,
-  },
+  // ==========================================
+  // PUBLIC AUTHENTICATION ROUTES
+  // ==========================================
 
   {
     path: '/login',
@@ -80,20 +76,38 @@ export const router = createBrowserRouter([
   },
 
   {
+    path: '/register',
+    element: <RegisterPage />,
+  },
+
+  {
     path: '/unauthorized',
     element: <UnauthorizedPage />,
   },
 
-  // Public routes
+  // ==========================================
+  // PUBLIC PASSPORT VERIFICATION
+  // ==========================================
+
+  {
+    path: '/verify/:token',
+    element: <VerifyPassportPage />,
+  },
+
+  // ==========================================
+  // PUBLIC WEBSITE
+  // ==========================================
 
   {
     path: '/',
     element: <PublicLayout />,
+
     children: [
       {
         index: true,
         element: <HomePage />,
       },
+
       {
         path: 'about',
         element: <AboutPage />,
@@ -101,21 +115,27 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // Authenticated routes
+  // ==========================================
+  // PROTECTED APPLICATION ROUTES
+  // ==========================================
 
   {
     element: <ProtectedRoute />,
 
     children: [
 
-      // Shared profile for all authenticated roles
+      // ======================================
+      // SHARED ACCOUNT PROFILE
+      // ======================================
 
       {
-        path: 'account/profile',
+        path: '/account/profile',
         element: <SharedProfilePage />,
       },
 
-      // Candidate routes
+      // ======================================
+      // CANDIDATE ROUTES
+      // ======================================
 
       {
         element: (
@@ -127,33 +147,54 @@ export const router = createBrowserRouter([
             element: <DashboardLayout />,
 
             children: [
+
+              // Candidate dashboard
+
               {
                 path: 'dashboard',
                 element: <DashboardPage />,
               },
 
+              // Professional profile
+
               {
                 path: 'profile',
                 element: <ProfilePage />,
               },
+
+              // Skills mapping engine
+
               {
-  path: 'skills',
-  element: <SkillsPage />,
-},
+                path: 'skills',
+                element: <SkillsPage />,
+              },
 
- {
-    path: 'evidence',
-    element: <EvidencePage />,
-  },
+              // Evidence portfolio
 
-  {
-  path: 'passport',
-  element: <PassportPage />,
-},
+              {
+                path: 'evidence',
+                element: <EvidencePage />,
+              },
 
+              // Digital Skills Passport
+
+              {
+                path: 'passport',
+                element: <PassportPage />,
+              },
+
+              // Employment Readiness Engine
+
+              {
+                path: 'readiness',
+                element: <ReadinessPage />,
+              },
+
+              // Features under development
 
               ...candidatePages.map((page) => ({
                 path: page.path,
+
                 element: (
                   <PlaceholderPage
                     title={page.title}
@@ -161,32 +202,32 @@ export const router = createBrowserRouter([
                   />
                 ),
               })),
+
             ],
           },
         ],
       },
 
-      // Reviewer routes
+      // ======================================
+      // REVIEWER ROUTES
+      // ======================================
 
       {
-  path: '/verify/:token',
-  element: <VerifyPassportPage />,
-},
+        element: (
+          <RoleGuard allowedRoles={['reviewer']} />
+        ),
 
-      {
-  element: (
-    <RoleGuard allowedRoles={['reviewer']} />
-  ),
+        children: [
+          {
+            path: 'reviewer/dashboard',
+            element: <ReviewerDashboard />,
+          },
+        ],
+      },
 
-  children: [
-    {
-      path: 'reviewer/dashboard',
-      element: <ReviewerDashboard />,
-    },
-  ],
-},
-
-      // Employer routes
+      // ======================================
+      // EMPLOYER ROUTES
+      // ======================================
 
       {
         element: (
@@ -196,6 +237,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: 'employer/dashboard',
+
             element: (
               <RoleDashboard role="employer" />
             ),
@@ -203,7 +245,9 @@ export const router = createBrowserRouter([
         ],
       },
 
-      // Administrator routes
+      // ======================================
+      // ADMINISTRATOR ROUTES
+      // ======================================
 
       {
         element: (
@@ -213,6 +257,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: 'admin/dashboard',
+
             element: (
               <RoleDashboard role="admin" />
             ),
@@ -223,7 +268,9 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // 404 fallback
+  // ==========================================
+  // 404 — PAGE NOT FOUND
+  // ==========================================
 
   {
     path: '*',
