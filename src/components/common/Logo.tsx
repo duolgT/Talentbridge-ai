@@ -3,28 +3,77 @@ import { BRAND } from '../../constants/branding'
 
 interface LogoProps {
   light?: boolean
+  variant?: 'light' | 'dark'
+  showTagline?: boolean
+  showText?: boolean
+  to?: string
+  className?: string
 }
 
-export default function Logo({ light = false }: LogoProps) {
+export default function Logo({
+  light = false,
+  variant,
+  showTagline = false,
+  showText = true,
+  to = '/',
+  className = '',
+}: LogoProps) {
+
+  const dark = variant
+    ? variant === 'dark'
+    : light
+
   return (
-    <Link aria-label={BRAND.name} to="/" className="inline-flex items-center gap-3">
+    <Link
+      to={to}
+      aria-label={`${BRAND.name} home`}
+      className={`inline-flex items-center gap-3 ${className}`}
+    >
 
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-dark">
+      <img
+        src={BRAND.logo}
+        alt=""
+        width={44}
+        height={44}
+        className="h-11 w-11 shrink-0 rounded-xl"
+      />
 
-        <img src={BRAND.logo} alt="" className="h-10 w-10" />
+      {showText && (
+        <div>
 
-      </div>
+          <span
+            className={`font-display text-xl font-extrabold tracking-tight ${
+              dark
+                ? 'text-white'
+                : 'text-[#123C35]'
+            }`}
+          >
+            Ujuzi
+            <span
+              className={
+                dark
+                  ? 'text-[#D5F76A]'
+                  : 'text-[#16826B]'
+              }
+            >
+              Link
+            </span>
+          </span>
 
-      <span
-        className={`font-display text-xl font-extrabold tracking-tight ${
-          light ? 'text-white' : 'text-primary-dark'
-        }`}
-      >
-        Ujuzi
-        <span className={light ? 'text-accent' : 'text-primary'}>
-          Link
-        </span>
-      </span>
+          {showTagline && (
+            <p
+              className={`mt-0.5 text-xs ${
+                dark
+                  ? 'text-white/60'
+                  : 'text-slate-500'
+              }`}
+            >
+              {BRAND.tagline}
+            </p>
+          )}
+
+        </div>
+      )}
 
     </Link>
   )

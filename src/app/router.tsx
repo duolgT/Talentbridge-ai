@@ -1,17 +1,27 @@
-import { createBrowserRouter } from 'react-router-dom'
+import {
+  createBrowserRouter,
+  Navigate,
+} from 'react-router-dom'
 
-// Authentication and authorization
+// ==========================================
+// AUTHENTICATION
+// ==========================================
 
 import ProtectedRoute from '../features/auth/ProtectedRoute'
 import RoleGuard from '../features/auth/RoleGuard'
 
-// Layouts
+// ==========================================
+// LAYOUTS
+// ==========================================
 
 import PublicLayout from '../layouts/PublicLayout'
 import DashboardLayout from '../layouts/DashboardLayout'
 import EmployerLayout from '../layouts/EmployerLayout'
+import AdminLayout from '../layouts/AdminLayout'
 
-// Public pages
+// ==========================================
+// PUBLIC PAGES
+// ==========================================
 
 import HomePage from '../pages/public/HomePage'
 import AboutPage from '../pages/public/AboutPage'
@@ -21,7 +31,9 @@ import NotFoundPage from '../pages/public/NotFoundPage'
 import UnauthorizedPage from '../pages/public/UnauthorizedPage'
 import VerifyPassportPage from '../pages/public/VerifyPassportPage'
 
-// Candidate pages
+// ==========================================
+// CANDIDATE PAGES
+// ==========================================
 
 import DashboardPage from '../pages/candidate/DashboardPage'
 import ProfilePage from '../pages/candidate/ProfilePage'
@@ -31,69 +43,68 @@ import PassportPage from '../pages/candidate/PassportPage'
 import ReadinessPage from '../pages/candidate/ReadinessPage'
 import OpportunitiesPage from '../pages/candidate/OpportunitiesPage'
 
-// Reviewer pages
+// ==========================================
+// REVIEWER PAGES
+// ==========================================
 
 import ReviewerDashboard from '../pages/reviewer/ReviewerDashboard'
 
-// Employer pages
+// ==========================================
+// EMPLOYER PAGES
+// ==========================================
 
 import EmployerDashboard from '../pages/employer/EmployerDashboard'
 import CreateOpportunityPage from '../pages/employer/CreateOpportunityPage'
 import ManageOpportunitiesPage from '../pages/employer/ManageOpportunitiesPage'
+import EmployerApplicationsPage from '../pages/employer/EmployerApplicationsPage'
+import EmployerVerifyPage from '../pages/employer/EmployerVerifyPage'
 
-// Shared pages
+// ==========================================
+// ADMINISTRATOR PAGES
+// ==========================================
+
+import AdminDashboard from '../pages/admin/AdminDashboard'
+import AdminUsersPage from '../pages/admin/AdminUsersPage'
+import AdminReviewersPage from '../pages/admin/AdminReviewersPage'
+import AdminOpportunitiesPage from '../pages/admin/AdminOpportunitiesPage'
+import AdminAuditLogsPage from '../pages/admin/AdminAuditLogsPage'
+import AdminAnalyticsPage from '../pages/admin/AdminAnalyticsPage'
+
+// ==========================================
+// SHARED PAGES
+// ==========================================
 
 import SharedProfilePage from '../pages/SharedProfilePage'
-import RoleDashboard from '../pages/RoleDashboard'
 import PlaceholderPage from '../pages/PlaceholderPage'
 
-// Remaining candidate placeholders
+// ==========================================
+// CANDIDATE PLACEHOLDERS
+// ==========================================
 
 const candidatePages = [
-
   {
     path: 'assessments',
     title: 'Skills assessments',
     description:
       'Demonstrate your professional competencies through practical assessments.',
   },
-
   {
     path: 'settings',
     title: 'Account settings',
     description:
       'Manage your account preferences, privacy and security.',
   },
-
 ]
 
-// Remaining employer placeholders
-
-const employerPages = [
-
-  {
-    path: 'applications',
-    title: 'Manage applications',
-    description:
-      'Review applications submitted to your opportunities. This feature is currently under development.',
-  },
-
-  {
-    path: 'verify',
-    title: 'Verify Skills Passport',
-    description:
-      'Validate Digital Skills Passports voluntarily shared by candidates.',
-  },
-
-]
-
-// Application router
+// ==========================================
+// APPLICATION ROUTER
+// ==========================================
 
 export const router = createBrowserRouter([
 
-  // ==========================================
-  // PUBLIC AUTHENTICATION ROUTES
-  // ==========================================
+  // ========================================
+  // PUBLIC AUTHENTICATION
+  // ========================================
 
   {
     path: '/login',
@@ -110,41 +121,37 @@ export const router = createBrowserRouter([
     element: <UnauthorizedPage />,
   },
 
-  // ==========================================
+  // ========================================
   // PUBLIC PASSPORT VERIFICATION
-  // ==========================================
+  // ========================================
 
   {
     path: '/verify/:token',
     element: <VerifyPassportPage />,
   },
 
-  // ==========================================
+  // ========================================
   // PUBLIC WEBSITE
-  // ==========================================
+  // ========================================
 
   {
     path: '/',
     element: <PublicLayout />,
-
     children: [
-
       {
         index: true,
         element: <HomePage />,
       },
-
       {
         path: 'about',
         element: <AboutPage />,
       },
-
     ],
   },
 
-  // ==========================================
-  // PROTECTED APPLICATION ROUTES
-  // ==========================================
+  // ========================================
+  // PROTECTED APPLICATION
+  // ========================================
 
   {
     element: <ProtectedRoute />,
@@ -158,9 +165,9 @@ export const router = createBrowserRouter([
         element: <SharedProfilePage />,
       },
 
-      // ======================================
+      // ====================================
       // CANDIDATE ROUTES
-      // ======================================
+      // ====================================
 
       {
         element: (
@@ -210,31 +217,24 @@ export const router = createBrowserRouter([
               },
 
               ...candidatePages.map((page) => ({
-
                 path: page.path,
-
                 element: (
-
                   <PlaceholderPage
                     title={page.title}
                     description={page.description}
                   />
-
                 ),
-
               })),
 
             ],
-
           },
 
         ],
-
       },
 
-      // ======================================
+      // ====================================
       // REVIEWER ROUTES
-      // ======================================
+      // ====================================
 
       {
         element: (
@@ -244,17 +244,31 @@ export const router = createBrowserRouter([
         children: [
 
           {
-            path: 'reviewer/dashboard',
-            element: <ReviewerDashboard />,
+            path: 'reviewer',
+
+            children: [
+
+              {
+                index: true,
+                element: (
+                  <Navigate to="dashboard" replace />
+                ),
+              },
+
+              {
+                path: 'dashboard',
+                element: <ReviewerDashboard />,
+              },
+
+            ],
           },
 
         ],
-
       },
 
-      // ======================================
+      // ====================================
       // EMPLOYER ROUTES
-      // ======================================
+      // ====================================
 
       {
         element: (
@@ -271,7 +285,9 @@ export const router = createBrowserRouter([
 
               {
                 index: true,
-                element: <EmployerDashboard />,
+                element: (
+                  <Navigate to="dashboard" replace />
+                ),
               },
 
               {
@@ -279,55 +295,40 @@ export const router = createBrowserRouter([
                 element: <EmployerDashboard />,
               },
 
-              // Manage opportunities
-
               {
                 path: 'opportunities',
                 element: <ManageOpportunitiesPage />,
               },
-
-              // Create opportunity
 
               {
                 path: 'opportunities/create',
                 element: <CreateOpportunityPage />,
               },
 
-              // Edit existing draft
-
               {
                 path: 'opportunities/:id/edit',
                 element: <CreateOpportunityPage />,
               },
 
-              // Remaining employer features
+              {
+                path: 'applications',
+                element: <EmployerApplicationsPage />,
+              },
 
-              ...employerPages.map((page) => ({
-
-                path: page.path,
-
-                element: (
-
-                  <PlaceholderPage
-                    title={page.title}
-                    description={page.description}
-                  />
-
-                ),
-
-              })),
+              {
+                path: 'verify',
+                element: <EmployerVerifyPage />,
+              },
 
             ],
-
           },
 
         ],
-
       },
 
-      // ======================================
+      // ====================================
       // ADMINISTRATOR ROUTES
-      // ======================================
+      // ====================================
 
       {
         element: (
@@ -337,25 +338,60 @@ export const router = createBrowserRouter([
         children: [
 
           {
-            path: 'admin/dashboard',
+            path: 'admin',
+            element: <AdminLayout />,
 
-            element: (
-              <RoleDashboard role="admin" />
-            ),
+            children: [
 
+              {
+                index: true,
+                element: (
+                  <Navigate to="dashboard" replace />
+                ),
+              },
+
+              {
+                path: 'dashboard',
+                element: <AdminDashboard />,
+              },
+
+              {
+                path: 'users',
+                element: <AdminUsersPage />,
+              },
+
+              {
+                path: 'reviewers',
+                element: <AdminReviewersPage />,
+              },
+
+              {
+                path: 'opportunities',
+                element: <AdminOpportunitiesPage />,
+              },
+
+              {
+                path: 'analytics',
+                element: <AdminAnalyticsPage />,
+              },
+
+              {
+                path: 'audit-logs',
+                element: <AdminAuditLogsPage />,
+              },
+
+            ],
           },
 
         ],
-
       },
 
     ],
-
   },
 
-  // ==========================================
+  // ========================================
   // PAGE NOT FOUND
-  // ==========================================
+  // ========================================
 
   {
     path: '*',
