@@ -94,7 +94,7 @@ export default function DashboardPage() {
         </p>
 
         <h1 className="mt-2 text-3xl font-extrabold">
-          Welcome to TalentBridge.
+          Welcome to UjuziLink.
         </h1>
 
         <p className="mt-2 text-sm leading-relaxed text-muted">

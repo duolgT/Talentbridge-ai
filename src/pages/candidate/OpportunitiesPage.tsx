@@ -1125,7 +1125,7 @@ function OpportunitiesWorkspace({
                   <p className="mt-3 text-sm leading-relaxed text-muted">
 
                     These competencies are not currently
-                    recorded in your TalentBridge profile.
+                    recorded in your UjuziLink profile.
                     Add skills you already possess or explore
                     training for skills you want to develop.
 
@@ -1950,7 +1950,7 @@ function OpportunitiesWorkspace({
               <p className="mt-2 text-sm text-muted">
 
                 Track the applications you have
-                submitted through TalentBridge.
+                submitted through UjuziLink.
 
               </p>
 
@@ -2312,7 +2312,7 @@ function OpportunitiesWorkspace({
 
             <p className="text-xs leading-relaxed text-muted">
 
-              TalentBridge matches opportunities using
+              UjuziLink matches opportunities using
               your recorded professional competencies.
 
               Matching percentages measure overlap

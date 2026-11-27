@@ -132,7 +132,7 @@ export default function RegisterPage() {
         </div>
 
         <p className="text-sm text-white/60">
-          TalentBridge AI — Skills without borders.
+          UjuziLink — Skills without borders.
         </p>
 
       </section>

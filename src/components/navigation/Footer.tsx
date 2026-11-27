@@ -34,7 +34,7 @@ export default function Footer() {
               </Link>
 
               <Link to="/about" className="hover:text-white">
-                About TalentBridge
+                About UjuziLink
               </Link>
 
               <Link to="/register" className="hover:text-white">
@@ -77,7 +77,7 @@ export default function Footer() {
         <div className="mt-12 flex flex-wrap justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/55">
 
           <p>
-            © {new Date().getFullYear()} TalentBridge AI.
+            © {new Date().getFullYear()} UjuziLink.
             All rights reserved.
           </p>
 

@@ -78,7 +78,7 @@ export default function PassportCard({
             <div>
 
               <h2 className="text-lg font-bold">
-                TalentBridge AI
+                UjuziLink
               </h2>
 
               <p className="text-xs text-white/60">
@@ -114,7 +114,7 @@ export default function PassportCard({
 
             <h1 className="break-words text-3xl font-extrabold">
 
-              {data.full_name || 'TalentBridge candidate'}
+              {data.full_name || 'UjuziLink candidate'}
 
             </h1>
 
@@ -217,7 +217,7 @@ export default function PassportCard({
           <p className="mt-2 text-sm text-slate-500">
 
             Skills supported by evidence approved
-            through the TalentBridge review process.
+            through the UjuziLink review process.
 
           </p>
 
@@ -360,7 +360,7 @@ export default function PassportCard({
 
           <p className="text-xs leading-relaxed text-slate-500">
 
-            TalentBridge verifies supporting evidence
+            UjuziLink verifies supporting evidence
             through its platform review process.
             This passport is not a government-issued
             identity document, academic accreditation,

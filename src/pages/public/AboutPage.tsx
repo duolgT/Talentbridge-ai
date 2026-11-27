@@ -5,7 +5,7 @@ export default function AboutPage() {
       <div className="mx-auto max-w-3xl">
 
         <span className="text-xs font-bold uppercase tracking-widest text-primary">
-          About TalentBridge
+          About UjuziLink
         </span>
 
         <h1 className="mt-4 text-4xl font-extrabold sm:text-5xl">
@@ -21,7 +21,7 @@ export default function AboutPage() {
           </p>
 
           <p>
-            TalentBridge AI is designed to help displaced
+            UjuziLink is designed to help displaced
             professionals demonstrate their competencies,
             prepare for lawful employment and connect
             with meaningful opportunities.
@@ -42,7 +42,7 @@ export default function AboutPage() {
 
           <p className="mt-3 leading-relaxed text-muted">
 
-            TalentBridge does not issue official academic
+            UjuziLink does not issue official academic
             qualifications, professional licences or work
             permits. We support evidence preparation,
             human review and appropriate referrals.

@@ -267,7 +267,7 @@ function ReviewerWorkspace({
 
           <div>
             <h1 className="font-bold">
-              TalentBridge AI
+              UjuziLink
             </h1>
 
             <p className="text-xs text-muted">

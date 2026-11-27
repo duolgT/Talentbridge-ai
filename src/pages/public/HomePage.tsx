@@ -262,7 +262,7 @@ export default function HomePage() {
         <div className="max-w-2xl">
 
           <span className="text-xs font-bold uppercase tracking-widest text-primary">
-            The TalentBridge difference
+            The UjuziLink difference
           </span>
 
           <h2 className="mt-4 text-3xl font-extrabold sm:text-4xl">
@@ -387,7 +387,7 @@ export default function HomePage() {
 
             <p className="mt-4 leading-relaxed text-muted">
 
-              TalentBridge is designed to contribute to
+              UjuziLink is designed to contribute to
               inclusive education, decent work, reduced
               inequalities and stronger partnerships.
 
