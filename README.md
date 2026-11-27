@@ -1,75 +1,68 @@
-# React + TypeScript + Vite
+# UjuziLink
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Skills without borders.**
 
-Currently, two official plugins are available:
+Recognize talent. Verify skills. Unlock opportunities.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## About UjuziLink
 
-## React Compiler
+UjuziLink is a digital skills recognition and employment platform designed to empower displaced and underserved professionals by helping them document their professional experience, validate their competencies and access meaningful economic opportunities.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## The Problem
 
-## Expanding the ESLint configuration
+Skilled displaced professionals frequently encounter barriers to employment, including limited credential recognition, insufficient professional networks and difficulties demonstrating their competencies to potential employers.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Our Solution
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+UjuziLink connects professional skills, evidence-backed credentials and employment opportunities through an integrated digital platform.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Key Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Professional profiles and employment history
+- Rule-based professional skills mapping
+- Evidence portfolio and document uploads
+- Reviewer-based skills verification
+- Portable Ujuzi Skills Passports
+- Employment readiness checklist
+- Opportunity matching engine
+- Employer recruitment dashboard
+- Application management and shortlisting
+- Public passport verification
+- Role-based access control
 
-```
+## Technology Stack
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+**Frontend:** React, TypeScript, Vite, Tailwind CSS, Zustand and React Router.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**Backend:** Supabase, PostgreSQL, Supabase Authentication, Supabase Storage and PostgreSQL RPC functions.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
 
-```
+Install the project dependencies:
+
+`npm install`
+
+Configure the required environment variables in `.env.local`:
+
+- VITE_SUPABASE_URL
+- VITE_SUPABASE_PUBLISHABLE_KEY
+
+Start the development server:
+
+`npm run dev`
+
+Create a production build:
+
+`npm run build`
+
+## Security and Privacy
+
+UjuziLink implements row-level security, role-based authorization and candidate-controlled credential sharing.
+
+Platform-verified skills do not constitute official professional accreditation or employment authorization.
+
+## Mission
+
+To ensure professional talent can be recognized regardless of geographical displacement.
+
+**UjuziLink — Skills without borders.**
