@@ -1009,7 +1009,7 @@ function ReadinessWorkspace({
             <p className="text-xs leading-relaxed text-muted">
 
               Your preparation score measures
-              completion of TalentBridge's
+              completion of UjuziLink's
               professional preparation checklist.
 
               It does not determine legal work

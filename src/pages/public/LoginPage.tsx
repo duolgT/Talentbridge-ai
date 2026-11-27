@@ -108,7 +108,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-sm text-white/60">
-          TalentBridge AI — Skills without borders.
+          UjuziLink — Skills without borders.
         </p>
 
       </section>
@@ -232,7 +232,7 @@ export default function LoginPage() {
 
           <p className="mt-7 text-center text-sm text-muted">
 
-            New to TalentBridge?{' '}
+            New to UjuziLink?{' '}
 
             <Link
               to="/register"

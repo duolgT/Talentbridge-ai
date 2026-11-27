@@ -139,7 +139,7 @@ export default function EmployerSidebar({
 
               <h1 className="text-lg font-extrabold">
 
-                TalentBridge
+                UjuziLink
 
               </h1>
 

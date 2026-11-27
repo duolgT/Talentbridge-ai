@@ -378,7 +378,7 @@ function EmployerWorkspace({
             Connect with skilled professionals,
             create meaningful opportunities and
             discover evidence-backed competencies
-            through TalentBridge AI.
+            through UjuziLink.
 
           </p>
 
@@ -1197,7 +1197,7 @@ function EmployerWorkspace({
 
           <p className="mt-2 text-sm leading-relaxed text-slate-600">
 
-            TalentBridge supports inclusive recruitment
+            UjuziLink supports inclusive recruitment
             based on professional competencies.
             Candidate information is restricted to
             authorized applications and credentials
@@ -1215,7 +1215,7 @@ function EmployerWorkspace({
 
       <footer className="border-t border-slate-200 py-5 text-center text-xs text-slate-500">
 
-        TalentBridge AI — Connecting skills
+        UjuziLink — Connecting skills
         to meaningful opportunities.
 
       </footer>

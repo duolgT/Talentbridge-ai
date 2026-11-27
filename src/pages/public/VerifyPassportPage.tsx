@@ -140,7 +140,7 @@ function VerificationWorkspace({
 
               <h1 className="font-extrabold text-[#123C35]">
 
-                TalentBridge AI
+                UjuziLink
 
               </h1>
 
@@ -159,7 +159,7 @@ function VerificationWorkspace({
             className="text-sm font-medium text-[#16826B]"
           >
 
-            About TalentBridge
+            About UjuziLink
 
           </Link>
 
@@ -270,14 +270,14 @@ function VerificationWorkspace({
 
                 <h2 className="font-bold text-green-800">
 
-                  Published TalentBridge passport
+                  Published UjuziLink passport
 
                 </h2>
 
                 <p className="mt-1 text-sm text-green-700">
 
                   Retrieved directly from the
-                  TalentBridge credential database.
+                  UjuziLink credential database.
 
                 </p>
 
