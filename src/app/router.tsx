@@ -9,6 +9,7 @@ import RoleGuard from '../features/auth/RoleGuard'
 
 import PublicLayout from '../layouts/PublicLayout'
 import DashboardLayout from '../layouts/DashboardLayout'
+import EmployerLayout from '../layouts/EmployerLayout'
 
 // Public pages
 
@@ -28,10 +29,15 @@ import SkillsPage from '../pages/candidate/SkillsPage'
 import EvidencePage from '../pages/candidate/EvidencePage'
 import PassportPage from '../pages/candidate/PassportPage'
 import ReadinessPage from '../pages/candidate/ReadinessPage'
+import OpportunitiesPage from '../pages/candidate/OpportunitiesPage'
 
 // Reviewer pages
 
 import ReviewerDashboard from '../pages/reviewer/ReviewerDashboard'
+
+// Employer pages
+
+import EmployerDashboard from '../pages/employer/EmployerDashboard'
 
 // Shared pages
 
@@ -49,16 +55,39 @@ const candidatePages = [
       'Demonstrate your professional competencies through practical assessments.',
   },
   {
-    path: 'opportunities',
-    title: 'Opportunity matching',
-    description:
-      'Discover employment and training opportunities aligned with your professional skills.',
-  },
-  {
     path: 'settings',
     title: 'Account settings',
     description:
       'Manage your account preferences, privacy and security.',
+  },
+]
+
+// Temporary employer placeholders
+
+const employerPages = [
+  {
+    path: 'opportunities',
+    title: 'Manage opportunities',
+    description:
+      'Manage your draft, published and closed opportunities. This feature is currently under development.',
+  },
+  {
+    path: 'opportunities/create',
+    title: 'Create opportunity',
+    description:
+      'Create employment, freelance and training opportunities. This feature is currently under development.',
+  },
+  {
+    path: 'applications',
+    title: 'Manage applications',
+    description:
+      'Review applications submitted to your opportunities. This feature is currently under development.',
+  },
+  {
+    path: 'verify',
+    title: 'Verify Skills Passport',
+    description:
+      'Validate Digital Skills Passports voluntarily shared by candidates. This feature is currently under development.',
   },
 ]
 
@@ -103,6 +132,7 @@ export const router = createBrowserRouter([
     element: <PublicLayout />,
 
     children: [
+
       {
         index: true,
         element: <HomePage />,
@@ -112,6 +142,7 @@ export const router = createBrowserRouter([
         path: 'about',
         element: <AboutPage />,
       },
+
     ],
   },
 
@@ -143,69 +174,66 @@ export const router = createBrowserRouter([
         ),
 
         children: [
+
           {
             element: <DashboardLayout />,
 
             children: [
-
-              // Candidate dashboard
 
               {
                 path: 'dashboard',
                 element: <DashboardPage />,
               },
 
-              // Professional profile
-
               {
                 path: 'profile',
                 element: <ProfilePage />,
               },
-
-              // Skills mapping engine
 
               {
                 path: 'skills',
                 element: <SkillsPage />,
               },
 
-              // Evidence portfolio
-
               {
                 path: 'evidence',
                 element: <EvidencePage />,
               },
-
-              // Digital Skills Passport
 
               {
                 path: 'passport',
                 element: <PassportPage />,
               },
 
-              // Employment Readiness Engine
-
               {
                 path: 'readiness',
                 element: <ReadinessPage />,
               },
 
-              // Features under development
+              {
+                path: 'opportunities',
+                element: <OpportunitiesPage />,
+              },
 
               ...candidatePages.map((page) => ({
                 path: page.path,
 
                 element: (
+
                   <PlaceholderPage
                     title={page.title}
                     description={page.description}
                   />
+
                 ),
               })),
 
             ],
+
           },
+
         ],
+
       },
 
       // ======================================
@@ -218,11 +246,14 @@ export const router = createBrowserRouter([
         ),
 
         children: [
+
           {
             path: 'reviewer/dashboard',
             element: <ReviewerDashboard />,
           },
+
         ],
+
       },
 
       // ======================================
@@ -235,14 +266,48 @@ export const router = createBrowserRouter([
         ),
 
         children: [
-          {
-            path: 'employer/dashboard',
 
-            element: (
-              <RoleDashboard role="employer" />
-            ),
+          {
+            path: 'employer',
+            element: <EmployerLayout />,
+
+            children: [
+
+              // Default employer dashboard
+
+              {
+                index: true,
+                element: <EmployerDashboard />,
+              },
+
+              // Employer overview
+
+              {
+                path: 'dashboard',
+                element: <EmployerDashboard />,
+              },
+
+              // Employer management pages
+
+              ...employerPages.map((page) => ({
+                path: page.path,
+
+                element: (
+
+                  <PlaceholderPage
+                    title={page.title}
+                    description={page.description}
+                  />
+
+                ),
+              })),
+
+            ],
+
           },
+
         ],
+
       },
 
       // ======================================
@@ -255,6 +320,7 @@ export const router = createBrowserRouter([
         ),
 
         children: [
+
           {
             path: 'admin/dashboard',
 
@@ -262,14 +328,17 @@ export const router = createBrowserRouter([
               <RoleDashboard role="admin" />
             ),
           },
+
         ],
+
       },
 
     ],
+
   },
 
   // ==========================================
-  // 404 — PAGE NOT FOUND
+  // PAGE NOT FOUND
   // ==========================================
 
   {
