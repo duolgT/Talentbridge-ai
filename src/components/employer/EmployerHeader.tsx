@@ -29,11 +29,19 @@ export default function EmployerHeader({
     (state) => state.profile
   )
 
-  const currentPage =
-    employerNavigation.find(
-      (item) => item.path === location.pathname
-    )
+  const currentPage = employerNavigation.find(
+  (item) => item.path === location.pathname
+)
 
+const pageTitle =
+  /^\/employer\/opportunities\/[^/]+\/edit$/.test(
+    location.pathname
+  )
+    ? 'Edit opportunity'
+    : currentPage?.label || 'Employer portal'
+
+
+    
   const initials = (
     profile?.full_name || 'Employer'
   )
@@ -72,8 +80,7 @@ export default function EmployerHeader({
           </p>
 
           <h2 className="truncate text-lg font-bold text-[#123C35]">
-
-            {currentPage?.label || 'Employer portal'}
+            {pageTitle}
 
           </h2>
 

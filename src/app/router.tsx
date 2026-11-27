@@ -38,6 +38,8 @@ import ReviewerDashboard from '../pages/reviewer/ReviewerDashboard'
 // Employer pages
 
 import EmployerDashboard from '../pages/employer/EmployerDashboard'
+import CreateOpportunityPage from '../pages/employer/CreateOpportunityPage'
+import ManageOpportunitiesPage from '../pages/employer/ManageOpportunitiesPage'
 
 // Shared pages
 
@@ -48,47 +50,41 @@ import PlaceholderPage from '../pages/PlaceholderPage'
 // Remaining candidate placeholders
 
 const candidatePages = [
+
   {
     path: 'assessments',
     title: 'Skills assessments',
     description:
       'Demonstrate your professional competencies through practical assessments.',
   },
+
   {
     path: 'settings',
     title: 'Account settings',
     description:
       'Manage your account preferences, privacy and security.',
   },
+
 ]
 
-// Temporary employer placeholders
+// Remaining employer placeholders
 
 const employerPages = [
-  {
-    path: 'opportunities',
-    title: 'Manage opportunities',
-    description:
-      'Manage your draft, published and closed opportunities. This feature is currently under development.',
-  },
-  {
-    path: 'opportunities/create',
-    title: 'Create opportunity',
-    description:
-      'Create employment, freelance and training opportunities. This feature is currently under development.',
-  },
+
   {
     path: 'applications',
     title: 'Manage applications',
     description:
       'Review applications submitted to your opportunities. This feature is currently under development.',
   },
+
   {
     path: 'verify',
     title: 'Verify Skills Passport',
     description:
-      'Validate Digital Skills Passports voluntarily shared by candidates. This feature is currently under development.',
+      'Validate Digital Skills Passports voluntarily shared by candidates.',
   },
+
 ]
 
 // Application router
@@ -155,9 +151,7 @@ export const router = createBrowserRouter([
 
     children: [
 
-      // ======================================
-      // SHARED ACCOUNT PROFILE
-      // ======================================
+      // Shared account profile
 
       {
         path: '/account/profile',
@@ -216,6 +210,7 @@ export const router = createBrowserRouter([
               },
 
               ...candidatePages.map((page) => ({
+
                 path: page.path,
 
                 element: (
@@ -226,6 +221,7 @@ export const router = createBrowserRouter([
                   />
 
                 ),
+
               })),
 
             ],
@@ -273,23 +269,41 @@ export const router = createBrowserRouter([
 
             children: [
 
-              // Default employer dashboard
-
               {
                 index: true,
                 element: <EmployerDashboard />,
               },
-
-              // Employer overview
 
               {
                 path: 'dashboard',
                 element: <EmployerDashboard />,
               },
 
-              // Employer management pages
+              // Manage opportunities
+
+              {
+                path: 'opportunities',
+                element: <ManageOpportunitiesPage />,
+              },
+
+              // Create opportunity
+
+              {
+                path: 'opportunities/create',
+                element: <CreateOpportunityPage />,
+              },
+
+              // Edit existing draft
+
+              {
+                path: 'opportunities/:id/edit',
+                element: <CreateOpportunityPage />,
+              },
+
+              // Remaining employer features
 
               ...employerPages.map((page) => ({
+
                 path: page.path,
 
                 element: (
@@ -300,6 +314,7 @@ export const router = createBrowserRouter([
                   />
 
                 ),
+
               })),
 
             ],
@@ -327,6 +342,7 @@ export const router = createBrowserRouter([
             element: (
               <RoleDashboard role="admin" />
             ),
+
           },
 
         ],

@@ -322,3 +322,32 @@ export async function getEmployerDashboardData(
     stats,
   }
 }
+
+
+export async function saveOpportunityDraft(
+  opportunityId: string | null,
+  input: OpportunityInput,
+  skills: OpportunitySkillInput[],
+  publish = false
+): Promise<string> {
+
+  const { data, error } = await supabase.rpc(
+    'save_opportunity',
+    {
+      p_opportunity_id: opportunityId,
+      p_input: input,
+      p_skills: skills,
+      p_publish: publish,
+    }
+  )
+
+  if (error) throw error
+
+  if (!data?.id) {
+    throw new Error(
+      'The database did not return an opportunity ID.'
+    )
+  }
+
+  return data.id
+}
